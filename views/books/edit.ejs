@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Book Entry</h1>
+    <form action="/books/<%=book._id%>" class="newEdit" method="put">
+        <!-- Title -->
+        <label for="title" >Title: </label>
+        <input type="text" name="title" id="title" value = '<%=book.title%>' />
+        <!-- Author -->
+        <label for="author">Author: </label>
+        <input type="text" name="author" id="author"value = '<%=book.author%>' />
+        <!-- Date of Publishing -->
+        <label for="publishedDate">Date of PublicationL: </label>
+        <input type="date" name="publishedDate" id="publishedDate" value = '<%=book.publishedDate%>'/>
+        <!-- description -->
+        <label for="description">Synopsis: </label>
+        <input type="text" name="description" id="description" value = '<%=book.description%>'/>
+        <!-- genre -->
+        <label for="genre">Genre(s): </label>
+        <input type="text" name="genre" id="genre" value = '<%=book.genre%>'/>
+        <!-- isbn -->
+        <label for="isbn">ISBN: </label>
+        <input type="text" name="isbn" id="isbn" value = '<%=book.isbn%>'/>
+        <!-- pages -->
+         <label for="pages">Pages: </label>
+         <input type="number" name="pages" id="pages" value = '<%=book.pages%>'>
+        <!-- cover Art -->
+        <label for="cover">Cover URL:</label>
+        <input type="text" name="cover" id="cover"value = '<%=book.cover%>'>
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+      </form>
+
+</body>
+</html>

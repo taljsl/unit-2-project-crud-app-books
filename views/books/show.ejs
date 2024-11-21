@@ -14,9 +14,10 @@
     <p>Genre(s): <%=book.genre%></p>
     <p>Page Count: <%=book.pages%> Pages</p>
     <p>ISBN: <%=book.isbn%></p>
-<form action="/books/<%=book._id%>?_method-DELETE" method="post">
+<form action="/books/<%=book._id%>?_method=DELETE" method="post">
     <button type="submit">Delete</button>
 </form>
+<a href="/books/<%=book._id%>/edit">Edit</a>
 
     <a href="/books">Back to Books</a>
 </body>

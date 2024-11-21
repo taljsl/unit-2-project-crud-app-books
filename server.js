@@ -40,7 +40,10 @@ app.get('/books/:bookId',async (req,res) => {
     const foundBook = await Book.findById(req.params.bookId)
     res.render('books/show.ejs', {book: foundBook})
 })
-
+app.get('/books/:bookId/edit', async (req,res) => {
+    const foundBook = await Book.findById(req.params.bookId)
+    res.render('books/edit.ejs', {book: foundBook})
+})
 
 app.post('/books', async(req,res) => {
     await Book.create(req.body)
@@ -52,6 +55,11 @@ app.delete('/books/:bookId',async(req,res) => {
     res.redirect('/books')
 })
 
+
+app.put("/books/:bookId", async (req,res) =>{
+    await Book.findByIdAndUpdate(req.params.bookId, req.body)
+res.redirect(`/books/${req.params.bookId}`)
+})
 
 app.listen(3001, () => {
   console.log("Listening on port 3000");
