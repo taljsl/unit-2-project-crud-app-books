@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=book.title%></title>
+</head>
+<body>
+    <h1><%=book.title%></h1>
+    <img src="<%=book.cover%>" alt="">
+    <p>Author: <%=book.author%></p>
+    <p>Publication Date: <%=book.publishedDate%></p>
+    <p>Synopsis: <%=book.description%></p>
+    <p>Genre(s): <%=book.genre%></p>
+    <p>Page Count: <%=book.pages%> Pages</p>
+    <p>ISBN: <%=book.isbn%></p>
+<form action="/books/<%=book._id%>?_method-DELETE" method="post">
+    <button type="submit">Delete</button>
+</form>
+
+    <a href="/books">Back to Books</a>
+</body>
+</html>
+
+
