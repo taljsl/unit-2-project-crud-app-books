@@ -8,8 +8,12 @@ const bookSchema = new mongoose.Schema({
     isbn: String,
     genre: String,
     cover: String,
-    pages: Number
+    pages: Number,
+    
 })
 
 const Book = mongoose.model('Book', bookSchema)
 module.exports = Book;
+
+
+
