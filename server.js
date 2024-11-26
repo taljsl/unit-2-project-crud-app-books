@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require("express-session");
-
+const path = require("path");
 const app = express();
 
 const dotenv = require("dotenv");
@@ -32,6 +32,9 @@ app.use(
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
   })
 );
+// Use public
+app.use(express.static(path.join(__dirname, "public")));
+
 // the below was also made w/ the help of chatgpt. This is middleware to set a session ID if one isn't present
 app.use((req, res, next) => {
   if (!req.sessionID.user && !req.session.guestId) {

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
     <% if (user) { %>
@@ -17,8 +18,13 @@
           <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">Sign in</a>.
         </p>
         <% } %>
+
         <p>
-            <a href="/books">Your Books</a>
+            <a class ='books-link' href="/books">
+            <div class = 'books-link-text'>
+                Your Books
+                </div>
+            </a>
             <a href="/books/new">Add a Book</a>
         </p>
 </body>
