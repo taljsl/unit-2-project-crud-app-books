@@ -28,19 +28,41 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    // the below was made w/ chatgpt it sets up a cookie that makes a guest info save for 24 hours
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
   })
 );
+// the below was also made w/ the help of chatgpt. This is middleware to set a session ID if one isn't present
+app.use((req, res, next) => {
+  if (!req.sessionID.user && !req.session.guestId) {
+    req.session.guestId = req.sessionID;
+  }
+  next();
+});
+
 app.get("/", (req, res) => {
   res.render("home.ejs", { user: req.session.user });
 });
 // Instructions call for placing this .use below where we define homepage route
 app.use("/auth", authController);
 
-app.get("/books", async (req, res) => {
-  const allBooks = await Book.find();
-  console.log(allBooks);
-  res.render("books/books.ejs", { books: allBooks });
-});
+app.get('/books', async (req,res) => {
+    let query={};
+    // check for logged in user and pull those otherwise apply to guest session
+    if (req.session.user) {
+        query.account = req.session.user._id
+    }else if (req.session.guestId) {
+        query.sessionId= req.session.guestId
+    }
+    const books = await Book.find(query)
+    res.render("books/books.ejs", { books });
+})
+
+// The below does not filter books see new get above made w/ gpt assitance 
+// app.get("/books", async (req, res) => {
+//   const allBooks = await Book.find();
+//     res.render("books/books.ejs", { books: allBooks });
+// });
 
 app.get("/books/new", (req, res) => {
   res.render("books/new.ejs");
@@ -56,7 +78,23 @@ app.get("/books/:bookId/edit", async (req, res) => {
 });
 
 app.post("/books", async (req, res) => {
-  await Book.create(req.body);
+  const bookData = {
+    title: req.body.title,
+    author: req.body.author,
+    publishedDate: req.body.publishedDate,
+    description: req.body.description,
+    isbn: req.body.isbn,
+    genre: req.body.genre,
+    cover: req.body.cover,
+    pages: req.body.pages,
+  };
+
+  if (req.session.user) {
+    bookData.account = req.session.user._id; 
+  } else {
+    bookData.sessionId = req.session.guestId;
+  }
+  await Book.create(bookData);
   res.redirect("/books");
 });
 

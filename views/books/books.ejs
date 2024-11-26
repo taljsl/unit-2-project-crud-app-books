@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Your Books</title>
   </head>
   <body>
-    <h1>Filler Text for list of BOoks</h1>
-    
+    <h1>Your Books</h1>
 
     <ul>
-    
-    <%books.forEach(book => { %>
-        <li><a href="/books/<%=book._id%>"> <%=book.title%></a></li>
-   <% })%>
-
+      <%books.forEach(book => { %>
+      <li><a href="/books/<%=book._id%>"> <%=book.title%></a></li>
+      <% })%>
     </ul>
+
+    <a href="/">Home</a>
+    <a href="books/new">Add Another Book</a>
   </body>
 </html>
